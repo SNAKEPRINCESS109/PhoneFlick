@@ -162,5 +162,28 @@
       Don't have an account? <a href="sign.html">Sign Up</a>
     </div>
   </div>
+     
+  <script>
+    const loginForm = document.querySelector('form');
+    loginForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+  
+      const username = document.getElementById('username').value.trim();
+      const password = document.getElementById('password').value;
+  
+      const storedUser = JSON.parse(localStorage.getItem('user'));
+  
+      if (!storedUser) {
+        alert('No user found. Please sign up first.');
+        window.location.href = 'sign.html';
+      } else if (storedUser.username === username && storedUser.password === password) {
+        alert('Login successful!');
+        window.location.href = 'animation.html'; // Or wherever your app continues
+      } else {
+        alert('Invalid credentials. Please try again.');
+      }
+    });
+  </script>
+  
 </body>
 </html>
