@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Settings</title>
+  <style>
+    /* Define CSS Variables for light and dark themes */
+    :root {
+      --background-color-light: #f5f6fa;
+      --background-color-dark: #2c3e50;
+      --text-color-light: #333;
+      --text-color-dark: #fff;
+      --button-background-light: #3498db;
+      --button-background-dark: #2980b9;
+      --button-hover-light: #2980b9;
+      --button-hover-dark: #3498db;
+      --input-border-light: #ccc;
+      --input-border-dark: #7f8c8d;
+    }
+
+    /* Default light theme */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: var(--background-color-light);
+      margin: 0;
+      padding: 0;
+      color: var(--text-color-light);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Container Styles */
+    .container {
+      max-width: 800px;
+      margin: auto;
+      background-color: #fff;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      transition: background-color 0.3s ease;
+    }
+
+    /* Header */
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--text-color-light);
+      margin-bottom: 1.5rem;
+    }
+
+    /* Section */
+    .section h2 {
+      font-size: 1.8rem;
+      color: var(--text-color-light);
+      margin-bottom: 1.2rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .section p {
+      font-size: 1rem;
+      margin-bottom: 1.5rem;
+      color: #7f8c8d;
+    }
+
+    /* Form Styles */
+    .preferences {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .preference-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preference-group label {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-color-light);
+    }
+
+    .preference-group select,
+    .preference-group input[type="email"],
+    .preference-group input[type="password"] {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: 10px;
+      border: 1px solid var(--input-border-light);
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .preference-group select:focus,
+    .preference-group input[type="email"]:focus,
+    .preference-group input[type="password"]:focus {
+      border-color: #3498db;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    /* Button Styles */
+    button {
+      padding: 1rem 2rem;
+      background-color: var(--button-background-light);
+      color: white;
+      font-size: 1.1rem;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      margin-top: 2rem;
+      letter-spacing: 1px;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-light);
+      transform: translateY(-5px);
+    }
+
+    /* Tooltip Style */
+    .tooltip {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+      border-bottom: 1px dotted #3498db;
+    }
+
+    .tooltip .tooltip-text {
+      visibility: hidden;
+      width: 120px;
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      border-radius: 5px;
+      padding: 5px 0;
+      position: absolute;
+      z-index: 1;
+      bottom: 125%;
+      left: 50%;
+      margin-left: -60px;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltip-text {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    /* Dark mode styles that will be toggled with JS */
+    .dark-theme {
+      background-color: var(--background-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .dark-theme .container {
+      background-color: #34495e;
+    }
+
+    .dark-theme header {
+      color: var(--text-color-dark);
+    }
+
+    .dark-theme button {
+      background-color: var(--button-background-dark);
+    }
+
+    .dark-theme button:hover {
+      background-color: var(--button-hover-dark);
+    }
+
+    /* Mobile responsiveness */
+    @media (max-width: 768px) {
+      .container {
+        padding: 1.5rem;
+      }
+
+      header {
+        font-size: 2rem;
+      }
+
+      .preferences select,
+      .preferences input {
+        font-size: 1rem;
+        padding: 0.75rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      Account Settings
+    </header>
+
+    <section class="section">
+      <h2>Your Settings</h2>
+      <form class="preferences">
+        <!-- Language Selection -->
+        <div class="preference-group">
+          <label for="language">Language</label>
+          <div class="tooltip">
+            <select id="language">
+              <option>English</option>
+              <option>Spanish</option>
+              <option>French</option>
+              <option>German</option>
+            </select>
+            <span class="tooltip-text">Choose your preferred language.</span>
+          </div>
+        </div>
+
+        <!-- Theme Selection (Light/Dark Mode) -->
+        <div class="preference-group">
+          <label for="theme">Theme</label>
+          <div class="tooltip">
+            <select id="theme">
+              <option value="light">Light</option>
+              <option value="dark">Dark</option>
+            </select>
+            <span class="tooltip-text">Select your preferred theme.</span>
+          </div>
+        </div>
+
+        <!-- Other Settings -->
+        <div class="preference-group">
+          <label for="notifications">Notifications</label>
+          <select id="notifications">
+            <option>All</option>
+            <option>Email</option>
+            <option>Push</option>
+            <option>None</option>
+          </select>
+        </div>
+
+        <div class="preference-group">
+          <label for="privacy">Profile Privacy</label>
+          <select id="privacy">
+            <option>Public</option>
+            <option>Friends</option>
+            <option>Only Me</option>
+          </select>
+        </div>
+
+        <div class="preference-group">
+          <label for="timezone">Timezone</label>
+          <select id="timezone">
+            <option>GMT</option>
+            <option>EST</option>
+            <option>PST</option>
+            <option>CET</option>
+          </select>
+        </div>
+
+        <button type="submit">Save Changes</button>
+      </form>
+    </section>
+  </div>
+
+  <script>
+    // Get the theme select dropdown element
+    const themeSelect = document.getElementById('theme');
+    
+    // Check if a theme preference is saved in localStorage
+    const savedTheme = localStorage.getItem('theme');
+
+    // Apply saved theme if it exists
+    if (savedTheme) {
+      document.body.classList.add(savedTheme);
+      themeSelect.value = savedTheme;
+    }
+
+    // Change theme when the user selects a new option
+    themeSelect.addEventListener('change', function() {
+      // Remove both light and dark themes
+      document.body.classList.remove('light', 'dark');
+      
+      // Apply the selected theme
+      const selectedTheme = themeSelect.value;
+      document.body.classList.add(selectedTheme);
+
+      // Save the selected theme in localStorage for persistence
+      localStorage.setItem('theme', selectedTheme);
+    });
+  </script>
+</body>
+</html>

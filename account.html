@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Account</title>
+  <style>
+    /* Global Styles */
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2ecc71;
+      --tertiary-color: #e74c3c;
+      --background-light: #f4f4f4;
+      --background-dark: #2c3e50;
+      --card-bg-light: #fff;
+      --card-bg-dark: #34495e;
+      --text-light: #ecf0f1;
+      --text-dark: #333;
+      --border-radius: 10px;
+      --input-border-color: #ccc;
+      --input-border-focus: #3498db;
+      --button-border-radius: 12px;
+      --box-shadow-light: rgba(0, 0, 0, 0.1);
+      --box-shadow-dark: rgba(0, 0, 0, 0.2);
+      --transition-speed: 0.3s;
+    }
+
+    /* Body Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-light);
+      color: var(--text-dark);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+    }
+
+    /* Header Styles */
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      color: var(--text-dark);
+      margin-top: 2rem;
+    }
+
+    /* Container Styles */
+    .container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background-color: var(--card-bg-light);
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 20px var(--box-shadow-light);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .container.dark-mode {
+      background-color: var(--card-bg-dark);
+      box-shadow: 0 10px 20px var(--box-shadow-dark);
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      color: var(--text-dark);
+      margin-bottom: 1rem;
+    }
+
+    .section p {
+      font-size: 1.1rem;
+      color: #7f8c8d;
+      margin-bottom: 1.5rem;
+    }
+
+    /* Form Styles */
+    .preferences {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .preference-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preference-group label {
+      font-size: 1.1rem;
+      margin-bottom: 0.5rem;
+      color: var(--text-dark);
+    }
+
+    .preference-group input, .preference-group select {
+      padding: 0.8rem;
+      font-size: 1rem;
+      border-radius: var(--border-radius);
+      border: 1px solid var(--input-border-color);
+      background-color: var(--card-bg-light);
+      transition: border-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .preference-group input:focus, .preference-group select:focus {
+      border-color: var(--input-border-focus);
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    }
+
+    /* Button Styles */
+    button {
+      padding: 0.8rem 1.5rem;
+      background-color: var(--primary-color);
+      color: var(--text-light);
+      font-size: 1.1rem;
+      border: none;
+      border-radius: var(--button-border-radius);
+      cursor: pointer;
+      transition: background-color var(--transition-speed), transform 0.2s ease;
+    }
+
+    button:hover {
+      background-color: var(--secondary-color);
+      transform: translateY(-2px);
+    }
+
+    .change-password button:hover {
+      background-color: var(--tertiary-color);
+    }
+
+    /* Section Card Styles */
+    .card {
+      background-color: var(--card-bg-light);
+      padding: 2rem;
+      border-radius: var(--border-radius);
+      box-shadow: 0 10px 20px var(--box-shadow-light);
+      transition: background-color var(--transition-speed), box-shadow var(--transition-speed);
+    }
+
+    .card.dark-mode {
+      background-color: var(--card-bg-dark);
+      box-shadow: 0 10px 20px var(--box-shadow-dark);
+    }
+
+    .change-password h3 {
+      font-size: 1.7rem;
+      color: var(--text-dark);
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: var(--background-dark);
+      color: var(--text-light);
+    }
+
+    .container.dark-mode {
+      background-color: var(--card-bg-dark);
+    }
+
+    button.dark-mode {
+      background-color: var(--secondary-color);
+    }
+
+    button.dark-mode:hover {
+      background-color: var(--tertiary-color);
+    }
+  </style>
+</head>
+<body>
+  <header>
+    Account Details
+  </header>
+
+  <!-- Container for Account Details and Change Password -->
+  <section class="container">
+    <h2>Your Account</h2>
+    <p>Here, you can view and update your account details.</p>
+    <form class="preferences">
+      <div class="preference-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" value="john_doe" />
+      </div>
+      <div class="preference-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" value="john@example.com" />
+      </div>
+      <button type="submit">Update Account</button>
+    </form>
+
+    <!-- Change Password Section -->
+    <section class="card change-password">
+      <h3>Change Your Password</h3>
+      <form class="preferences">
+        <div class="preference-group">
+          <label for="current-password">Current Password</label>
+          <input type="password" id="current-password" />
+        </div>
+        <div class="preference-group">
+          <label for="new-password">New Password</label>
+          <input type="password" id="new-password" />
+        </div>
+        <div class="preference-group">
+          <label for="confirm-password">Confirm New Password</label>
+          <input type="password" id="confirm-password" />
+        </div>
+        <button type="submit">Change Password</button>
+      </form>
+    </section>
+  </section>
+
+  <!-- Toggle Dark Mode -->
+  <button id="theme-toggle" style="position: fixed; top: 20px; right: 20px; padding: 0.6rem 1.2rem; background-color: var(--primary-color); color: var(--text-light); border-radius: 5px; cursor: pointer;">
+    Toggle Dark Mode
+  </button>
+
+  <script>
+    const themeToggleButton = document.getElementById('theme-toggle');
+
+    // Check if dark mode is saved in localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      document.querySelectorAll('.container').forEach(container => container.classList.add('dark-mode'));
+    }
+
+    // Toggle Dark/Light mode
+    themeToggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      document.querySelectorAll('.container').forEach(container => container.classList.toggle('dark-mode'));
+
+      // Save theme preference in localStorage
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
+</body>
+</html>

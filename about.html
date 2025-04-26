@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About - PhoneFlick</title>
+  <style>
+    /* Global Styles */
+    :root {
+      --primary-color: #3498db;
+      --secondary-color: #2980b9;
+      --accent-color: #f39c12;
+      --text-color-light: #333;
+      --text-color-dark: #ecf0f1;
+      --background-color-light: #f4f4f4;
+      --background-color-dark: #2c3e50;
+      --input-background-light: #fff;
+      --input-background-dark: #34495e;
+      --button-background-light: #3498db;
+      --button-background-dark: #2980b9;
+      --button-hover-light: #2980b9;
+      --button-hover-dark: #3498db;
+      --border-radius: 12px;
+      --max-width: 1000px;
+      --card-shadow: rgba(0, 0, 0, 0.1);
+      --card-shadow-dark: rgba(0, 0, 0, 0.2);
+    }
+
+    /* General Body Styles */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: var(--background-color-light);
+      color: var(--text-color-light);
+      line-height: 1.6;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      padding-bottom: 3rem; /* Ensures footer does not overlap */
+    }
+
+    /* Header */
+    header {
+      background-color: var(--primary-color);
+      color: white;
+      text-align: center;
+      font-size: 3rem;
+      padding: 3rem;
+      margin-bottom: 3rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      border-bottom: 4px solid var(--secondary-color);
+    }
+
+    /* Section Styles */
+    .section {
+      max-width: var(--max-width);
+      margin: 3rem auto;
+      padding: 3rem;
+      background-color: var(--input-background-light);
+      border-radius: var(--border-radius);
+      box-shadow: 0 4px 15px var(--card-shadow);
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    /* Section Titles */
+    .section h2 {
+      font-size: 2.5rem;
+      color: var(--primary-color);
+      margin-bottom: 2rem;
+      text-align: center;
+      font-weight: 600;
+    }
+
+    /* Paragraphs */
+    .section p {
+      font-size: 1.2rem;
+      color: var(--text-color-light);
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    /* Lists */
+    ul {
+      padding-left: 20px;
+      list-style: none;
+      font-size: 1.1rem;
+      color: var(--text-color-light);
+      margin-bottom: 2rem;
+    }
+
+    ul li {
+      margin-bottom: 1.5rem;
+    }
+
+    ul li strong {
+      color: var(--primary-color);
+    }
+
+    ol {
+      padding-left: 20px;
+      font-size: 1.1rem;
+      color: var(--text-color-light);
+    }
+
+    /* Links */
+    a {
+      color: var(--primary-color);
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* Button Styles */
+    button {
+      padding: 1rem 2rem;
+      background-color: var(--button-background-light);
+      color: white;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      cursor: pointer;
+      transition: background-color 0.3s ease, transform 0.2s ease;
+      font-weight: 600;
+    }
+
+    button:hover {
+      background-color: var(--button-hover-light);
+      transform: translateY(-2px);
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: var(--background-color-dark);
+      color: var(--text-color-dark);
+    }
+
+    .section.dark-mode {
+      background-color: var(--input-background-dark);
+      box-shadow: 0 4px 15px var(--card-shadow-dark);
+    }
+
+    .section h2.dark-mode {
+      color: var(--accent-color);
+    }
+
+    .section p.dark-mode, ul li.dark-mode {
+      color: var(--text-color-dark);
+    }
+
+    /* Button Styles for Dark Mode */
+    button.dark-mode {
+      background-color: var(--button-background-dark);
+    }
+
+    button.dark-mode:hover {
+      background-color: var(--button-hover-dark);
+    }
+
+    /* Smooth Transition */
+    * {
+      transition: all 0.3s ease;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      header {
+        font-size: 2.5rem;
+        padding: 2rem;
+      }
+
+      .section {
+        padding: 2rem;
+      }
+
+      .section h2 {
+        font-size: 2rem;
+      }
+
+      .section p {
+        font-size: 1rem;
+      }
+
+      ul {
+        font-size: 1rem;
+      }
+
+      button {
+        padding: 0.8rem 1.6rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    About PhoneFlick
+  </header>
+
+  <section class="section">
+    <h2>📱 What is PhoneFlick?</h2>
+    <p>
+      PhoneFlick is your smart and friendly guide to finding the perfect smartphone — made just for <strong>you</strong>. Whether you love photography, gaming, binge-watching, or just want a phone that lasts all day, we’ll help you pick the best one without the stress.
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>🚀 How Does It Work?</h2>
+    <ol>
+      <li><strong>🔍 Use the Search:</strong> Quickly search any phone model to check its details.</li>
+      <li><strong>🎯 Set Your Preferences:</strong> Choose what matters most — battery, camera, processor, price, and more.</li>
+      <li><strong>✨ Get Smart Recommendations:</strong> We suggest phones that match your needs, updated regularly with the latest models.</li>
+      <li><strong>👤 Customize Your Account:</strong> Access privacy, settings, help, and upload a profile photo using the profile menu.</li>
+    </ol>
+  </section>
+
+  <section class="section">
+    <h2>🎯 Why Use PhoneFlick?</h2>
+    <ul>
+      <li><strong>✔ Save Time:</strong> No more scrolling through endless phones — we bring the best to you, based on your choices.</li>
+      <li><strong>✔ Avoid Confusion:</strong> Simple layout, easy filters, and clear specs help you decide fast — even if you’re not a techie.</li>
+      <li><strong>✔ Always Updated:</strong> We keep our recommendations fresh with the latest phones in the market.</li>
+      <li><strong>✔ Personalized for You:</strong> Whether you care about price, performance, or display — we’ve got you covered.</li>
+      <li><strong>✔ 100% Free:</strong> PhoneFlick is completely free to use, with no sign-up needed to explore.</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>👥 Who Is This For?</h2>
+    <p>PhoneFlick is perfect for:</p>
+    <ul>
+      <li>📷 <strong>Photography lovers</strong> looking for the best camera phones</li>
+      <li>🎮 <strong>Gamers</strong> who need powerful processors and smooth displays</li>
+      <li>🎓 <strong>Students</strong> who want budget-friendly performance</li>
+      <li>💼 <strong>Professionals</strong> who multitask on-the-go</li>
+      <li>👵 <strong>Non-techies</strong> who just want something simple and reliable</li>
+    </ul>
+  </section>
+
+  <section class="section">
+    <h2>📬 Need Help or Suggestions?</h2>
+    <p>
+      Got a question? Want help picking a phone? We’re happy to assist!  
+      Email us anytime at <a href="mailto:support@phoneflick.com">support@phoneflick.com</a>
+    </p>
+  </section>
+
+  <section class="section">
+    <h2>💡 Our Goal</h2>
+    <p>
+      At PhoneFlick, our goal is to make smartphone shopping easy, fun, and stress-free.  
+      We want everyone — whether tech-savvy or not — to feel confident choosing the right phone.
+    </p>
+  </section>
+
+  <button id="theme-toggle" style="position: fixed; top: 20px; right: 20px; padding: 1rem 2rem; background-color: var(--primary-color); color: white; border-radius: var(--border-radius); cursor: pointer; font-weight: bold;">
+    Toggle Dark Mode
+  </button>
+
+  <script>
+    const themeToggleButton = document.getElementById('theme-toggle');
+
+    // Check if dark mode is saved in localStorage
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.classList.add('dark-mode');
+      document.querySelectorAll('.section').forEach(section => section.classList.add('dark-mode'));
+    }
+
+    // Toggle Dark/Light mode
+    themeToggleButton.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      document.querySelectorAll('.section').forEach(section => section.classList.toggle('dark-mode'));
+
+      // Save theme preference in localStorage
+      if (document.body.classList.contains('dark-mode')) {
+        localStorage.setItem('theme', 'dark');
+      } else {
+        localStorage.setItem('theme', 'light');
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>PhoneFlick</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+     
+    /* Style for the iframe container */
+    iframe {
+      width: 100%;
+      height: 500px;
+      border: none;
+      border-radius: 8px;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f7fc;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background: linear-gradient(145deg, #3498db, #2980b9);
+      padding: 40px 20px;
+      color: white;
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 0 0 20px 20px;
+      margin-bottom: 30px;
+    }
+
+    /* Hidden toggle */
+    #dropdown-toggle {
+      display: none;
+    }
+
+    /* Profile icon (acts as button) */
+    .profile-container {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      background-color: #3498db;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      font-weight: bold;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .profile-container:hover {
+      background-color: #2980b9;
+      transform: scale(1.1);
+    }
+    
+    /* Style the phone card */
+.phone-card {
+  display: flex;
+  flex-direction: row;
+  margin: 10px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+}
+
+.phone-card-content {
+  display: flex;
+  gap: 15px;
+}
+
+.phone-image {
+  width: 120px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.phone-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.phone-details h3 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.phone-details p {
+  margin: 5px 0;
+}
+  /* Style for preferences section */
+  .preferences {
+      padding: 20px;
+      background-color: #f0f0f0;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+
+    .preferences label {
+      margin-right: 10px;
+      font-weight: bold;
+    }
+
+    .preferences select {
+      margin-bottom: 10px;
+      padding: 5px;
+    }
+
+    /* Dropdown default hidden */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 70px;
+      right: 20px;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+      width: 220px;
+      z-index: 1;
+    }
+
+    /* Show dropdown when checkbox is checked */
+    #dropdown-toggle:checked + label + .dropdown {
+      display: block;
+    }
+
+    .dropdown a,
+    .dropdown .upload-btn {
+      padding: 12px 16px;
+      display: block;
+      color: #333;
+      text-decoration: none;
+      font-size: 16px;
+      border-bottom: 1px solid #f1f1f1;
+      transition: background-color 0.3s ease;
+      border-radius: 10px;
+    }
+
+    .dropdown a:last-child {
+      border-bottom: none;
+    }
+
+    .dropdown a:hover,
+    .dropdown .upload-btn:hover {
+      background-color: #3498db;
+      color: white;
+    }
+
+    .dropdown a:focus {
+      background-color: #2980b9;
+      color: white;
+    }
+
+    .file-upload {
+      display: none;
+    }
+
+    .search-container {
+      margin: 30px auto;
+      max-width: 600px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+    }
+
+    .search-container input {
+      padding: 14px 20px;
+      font-size: 18px;
+      border: 1px solid #ccc;
+      border-radius: 30px 0 0 30px;
+      width: 80%;
+      transition: all 0.3s ease;
+      outline: none;
+    }
+
+    .search-container input:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    }
+
+    .search-container button {
+      padding: 14px 22px;
+      font-size: 18px;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 0 30px 30px 0;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .search-container button:hover {
+      background-color: #2980b9;
+    }
+
+    .section {
+      margin: 50px auto;
+      max-width: 1000px;
+      text-align: center;
+    }
+
+    .section h2 {
+      font-size: 2rem;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    .phone-list {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .phone-card {
+      background-color: white;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 250px;
+      text-align: center;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .phone-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .phone-card h3 {
+      font-size: 1.5rem;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    .phone-card p {
+      font-size: 1rem;
+      color: #777;
+    }
+
+    .preferences {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      max-width: 800px;
+      margin: 30px auto;
+    }
+
+    .preference-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .preference-group label {
+      font-size: 1.1rem;
+      color: #333;
+    }
+
+    .preference-group select {
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+
+    .preference-group select:focus {
+      border-color: #3498db;
+      box-shadow: 0 0 8px rgba(52, 152, 219, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      header {
+        font-size: 2rem;
+        padding: 30px 15px;
+      }
+
+      .search-container {
+        flex-direction: column;
+      }
+
+      .search-container input,
+      .search-container button {
+        width: 100%;
+        margin-bottom: 10px;
+      }
+
+      .phone-list {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .preferences {
+        grid-template-columns: 1fr;
+      }
+
+      .phone-card {
+        width: 100%;
+        max-width: 280px;
+        margin-bottom: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    PhoneFlick
+  </header>
+
+  <!-- Profile toggle and dropdown -->
+  <input type="checkbox" id="dropdown-toggle" hidden>
+  <label for="dropdown-toggle" class="profile-container">+</label>
+  <div class="dropdown">
+    <a href="settings.html">Settings</a>
+    <a href="account.html">Account</a>
+    <a href="privacy.html">Privacy</a>
+    <a href="help.html">Help</a>
+    <div class="upload-btn" onclick="document.getElementById('fileInput').click();">
+      Upload Picture
+    </div>
+    <input type="file" id="fileInput" class="file-upload" accept="image/*" />
+    <a href="about.html">About</a>
+  </div>
+
+
+
+  <!-- Search -->
+  <div class="search-container">
+    <input id="model_name" type="text" placeholder="Search for a phone model..." aria-label="Search phones" />
+    <button id="search-btn" type="button" aria-label="Search" disabled>Search</button>
+  </div>
+  
+   <!-- search phone details -->
+  <div class="smart-phn-dtls">
+  </div>
+
+  <!-- Recommendations -->
+  <div class="section">
+    <h2>New Recommendations</h2>
+    <div class="phone-list">
+      <div class="phone-card">
+        <h3>Galaxy S25</h3>
+        <p>Snapdragon 8 Gen 3, 5000mAh, AMOLED 120Hz</p>
+      </div>
+      <div class="phone-card">
+        <h3>iPhone 16</h3>
+        <p>A18 Bionic, 6.1” Retina XDR, 128GB Storage</p>
+      </div>
+      <div class="phone-card">
+        <h3>Pixel 9</h3>
+        <p>Google Tensor G4, AI Camera, Android 15</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Preferences -->
+  <div class="section">
+    <h2>Preferences</h2>
+    <form class="preferences" aria-label="Phone Preferences Form">
+      <div class="preference-group">
+        <label for="battery">Battery Capacity</label>
+        <select id="battery">
+          <option>Any</option>
+          <option>3000mAh+</option>
+          <option>4000mAh+</option>
+          <option>5000mAh+</option>
+          <option>6000mAh+</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="camera">Camera Quality</label>
+        <select id="camera">
+          <option>Any</option>
+          <option>12MP+</option>
+          <option>48MP+</option>
+          <option>64MP+</option>
+          <option>108MP+</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="processor">Processor</label>
+        <select id="processor">
+          <option>Any</option>
+          <option>Snapdragon</option>
+          <option>MediaTek</option>
+          <option>Apple A-series</option>
+          <option>Google Tensor</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="price">Price Range</label>
+        <select id="price">
+          <option>Any</option>
+          <option>Under ₹20,000</option>
+          <option>₹20,000–₹40,000</option>
+          <option>₹40,000–₹60,000</option>
+          <option>Above ₹60,000</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="display">Display Type</label>
+        <select id="display">
+          <option>Any</option>
+          <option>LCD</option>
+          <option>OLED</option>
+          <option>AMOLED</option>
+          <option>Super Retina</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="refresh">Refresh Rate</label>
+        <select id="refresh">
+          <option>Any</option>
+          <option>60Hz</option>
+          <option>90Hz</option>
+          <option>120Hz</option>
+          <option>144Hz+</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="ram">RAM Size</label>
+        <select id="ram">
+          <option>Any</option>
+          <option>4GB+</option>
+          <option>6GB+</option>
+          <option>8GB+</option>
+          <option>12GB+</option>
+        </select>
+      </div>
+      <div class="preference-group">
+        <label for="storage">Storage Capacity</label>
+        <select id="storage">
+          <option>Any</option>
+          <option>64GB+</option>
+          <option>128GB+</option>
+          <option>256GB+</option>
+          <option>512GB+</option>
+        </select>
+      </div>
+      <div style="grid-column: span 2; text-align: center; margin-top: 10px;">
+        <button type="button" onclick="resetFilters()" style="padding: 10px 20px; background-color: #e74c3c; color: white; border: none; border-radius: 8px; cursor: pointer;">Clear Filters</button>
+      </div>      
+    </form>
+  </div>
+  <script>
+    let smartPhones = [];
+
+const searchBtn = document.querySelector("#search-btn");
+searchBtn.disabled = true; // disable button initially
+
+fetch('all_phones.json')
+  .then(response => {
+    if (!response.ok) {
+      throw new Error("Failed to fetch phone data.");
+    }
+    return response.json();
+  })
+  .then(data => {
+    
+    for(const key in data) {
+      smartPhones.push(...data[key]);
+    }
+
+ //   console.log(smartPhones[0]);
+    searchBtn.disabled = false; // enable button after data is ready
+  })
+  .catch(err => {
+    console.error('Error loading phone data:', err);
+    alert("Failed to load phone data. Please check the console.");
+  });
+
+   
+  searchBtn.addEventListener("click", handleSearch);
+
+  function handleSearch() {
+    const cont = document.querySelector(".smart-phn-dtls");
+    cont.innerHTML = "";
+    const modelInput = document.querySelector("#model_name").value.trim().toLowerCase();
+
+    const match = smartPhones.find(phone => phone.name.toLowerCase() === modelInput);
+
+//    console.log("Phone models loaded:", smartPhones.map(p => p.name));
+
+    if (match) {
+      displayPhone(match);
+    } else {
+      cont.innerHTML = "<p>No phone found with that model.</p>";
+    }
+  }
+
+  function displayPhone(phone) {
+    const { url } = phone;
+
+    window.location.href = url;
+
+    
+  }
+
+  // Display recommendations dynamically with images and details
+function displayRecommendations() {
+  const phoneListContainer = document.getElementById("phone-list");
+
+  // Clear any existing content
+  phoneListContainer.innerHTML = "";
+
+  // Iterate through the recommendations and create a card for each phone
+  recommendations.forEach(phone => {
+    const phoneCard = document.createElement("div");
+    phoneCard.classList.add("phone-card");
+
+    phoneCard.innerHTML = `
+      <div class="phone-card-content">
+        <!-- Phone Image -->
+        <img src="${phone.image}" alt="${phone.model_name}" class="phone-image" />
+
+        <!-- Phone Details -->
+        <div class="phone-details">
+          <h3>${phone.model_name}</h3>
+          <p>${phone.details}</p>
+          <p><strong>Rating:</strong> ${phone.rating}⭐</p>
+          <p><strong>Available on:</strong> ${phone.app}</p>
+        </div>
+      </div>
+    `;
+
+    phoneListContainer.appendChild(phoneCard);
+  });
+}
+
+  // Filter by preferences
+  document.querySelectorAll(".preferences select").forEach(select => {
+    select.addEventListener("change", handleFilter);
+  });
+
+  function handleFilter() {
+    const filters = {
+      battery: document.querySelector("#battery").value,
+      camera: document.querySelector("#camera").value,
+      processor: document.querySelector("#processor").value,
+      price: document.querySelector("#price").value,
+      display: document.querySelector("#display").value,
+      refresh: document.querySelector("#refresh").value,
+      ram: document.querySelector("#ram").value,
+      storage: document.querySelector("#storage").value
+    };
+
+    let filtered = smartPhones.filter(phone => {
+      return (
+        (filters.battery === "Any" || phone.battery.includes(filters.battery.replace("+", ""))) &&
+        (filters.camera === "Any" || phone.camera.includes(filters.camera.replace("+", ""))) &&
+        (filters.processor === "Any" || phone.processor.includes(filters.processor)) &&
+        (filters.price === "Any" || checkPriceRange(phone.price, filters.price)) &&
+        (filters.display === "Any" || phone.display === filters.display) &&
+        (filters.refresh === "Any" || phone.refresh_rate === filters.refresh) &&
+        (filters.ram === "Any" || phone.ram.includes(filters.ram.replace("+", ""))) &&
+        (filters.storage === "Any" || phone.storage.includes(filters.storage.replace("+", "")))
+      );
+    });
+
+    const cont = document.querySelector(".smart-phn-dtls");
+    cont.innerHTML = "";
+
+    if (filtered.length > 0) {
+      filtered.forEach(phone => displayPhone(phone));
+    } else {
+      cont.innerHTML = "<p>No phones match your filters.</p>";
+    }
+  }
+
+  function checkPriceRange(price, filter) {
+    const num = parseInt(price.replace(/₹|,/g, ''));
+    if (filter === "Under ₹20,000") return num < 20000;
+    if (filter === "₹20,000–₹40,000") return num >= 20000 && num <= 40000;
+    if (filter === "₹40,000–₹60,000") return num > 40000 && num <= 60000;
+    if (filter === "Above ₹60,000") return num > 60000;
+    return true;
+  }
+
+  function resetFilters() {
+  document.querySelectorAll(".preferences select").forEach(select => {
+    select.value = "Any";
+  });
+  document.querySelector(".smart-phn-dtls").innerHTML = "";
+}
+
+// Handle image upload and preview
+const fileInput = document.getElementById("fileInput");
+const previewImage = document.getElementById("preview");
+
+fileInput.addEventListener("change", function () {
+  const file = fileInput.files[0];
+  if (file && file.type.startsWith("image/")) {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      previewImage.src = e.target.result;
+      previewImage.style.display = "inline-block";
+    };
+    reader.readAsDataURL(file);
+  } else {
+    previewImage.style.display = "none";
+  }
+});
+
+  </script>
+</body>
+</html>

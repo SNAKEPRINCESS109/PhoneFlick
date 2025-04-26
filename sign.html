@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f') no-repeat center center fixed;
+      background-size: cover;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      color: white;
+      overflow: hidden;
+    }
+
+    .signup-container {
+      background: rgba(0, 0, 0, 0.6); /* Dark transparent background */
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5); /* Shadow to make the container stand out */
+      width: 90%;
+      max-width: 400px;
+      text-align: center;
+      opacity: 0;
+      animation: fadeIn 1s forwards;
+    }
+
+    .signup-container h2 {
+      color: #FF66CC; /* Bright, pinkish color */
+      margin-bottom: 20px;
+      font-size: 2.5rem;
+      text-shadow: 0 0 10px #FF66CC, 0 0 15px #FF66CC; /* Glowing text effect */
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      color: #FF66CC;
+      font-size: 1.1rem;
+      text-shadow: 0 0 8px #FF66CC, 0 0 10px #FF66CC;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 12px;
+      margin-top: 8px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      font-size: 1rem;
+      text-shadow: 0 0 6px #FF66CC;
+      transition: all 0.3s ease;
+    }
+
+    .form-group input:focus {
+      outline: none;
+      border-color: #FF66CC;
+      box-shadow: 0 0 10px #FF66CC; /* Glowing focus effect */
+    }
+
+    .signup-btn {
+      width: 100%;
+      padding: 14px;
+      background: #FF66CC;
+      border: none;
+      color: white;
+      font-size: 1.1rem;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .signup-btn:hover {
+      background: #ff3385;
+      transform: scale(1.05); /* Slightly enlarges the button */
+    }
+
+    .login-link {
+      margin-top: 20px;
+      font-size: 0.9rem;
+    }
+
+    .login-link a {
+      color: #FF66CC;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .login-link a:hover {
+      color: #ff3385;
+      text-decoration: underline;
+    }
+
+    /* Fade-in animation for sign up container */
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 600px) {
+      .signup-container {
+        padding: 25px;
+      }
+
+      .signup-container h2 {
+        font-size: 2rem;
+      }
+
+      .form-group input {
+        padding: 10px;
+        font-size: 0.9rem;
+      }
+
+      .signup-btn {
+        font-size: 1rem;
+        padding: 12px;
+      }
+    }
+
+    @media (max-width: 400px) {
+      .signup-container {
+        width: 85%;
+      }
+
+      .form-group input {
+        padding: 8px;
+        font-size: 0.8rem;
+      }
+
+      .signup-btn {
+        font-size: 0.9rem;
+        padding: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="signup-container">
+    <h2>Create Account</h2>
+    <form action="animation.html" method="GET">
+
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="Enter your email" />
+      </div>
+
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required placeholder="Choose a username" />
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required placeholder="Create a password" />
+      </div>
+
+      <button type="submit" class="signup-btn" aria-label="Create your account">Sign Up</button>
+    </form>
+    <div class="login-link">
+      Already have an account? <a href="login.html">Log In</a>
+    </div>
+  </div>
+
+</body>
+</html>

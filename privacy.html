@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Privacy Settings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #F8F9FB;
+      color: #2C3E50;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 2rem;
+      background: linear-gradient(135deg, rgba(41, 128, 185, 0.1), rgba(52, 152, 219, 0.1));
+    }
+
+    .container {
+      width: 100%;
+      max-width: 900px;
+      background: #FFFFFF;
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      overflow: hidden;
+      transform: translateY(50px);
+      animation: fadeInUp 0.8s ease-out forwards;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(50px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: 600;
+      color: #4A90E2;
+      margin-bottom: 2rem;
+      letter-spacing: 1px;
+    }
+
+    .profile-section {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .profile-section img {
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .profile-section img:hover {
+      transform: scale(1.1);
+    }
+
+    .profile-section input[type="file"] {
+      margin-top: 1rem;
+      padding: 0.7rem 1.5rem;
+      font-size: 1.1rem;
+      background: #FF8A65;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .profile-section input[type="file"]:hover {
+      background: #F44336;
+    }
+
+    .section {
+      margin-bottom: 2.5rem;
+    }
+
+    .section h2 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      color: #34495E;
+      margin-bottom: 1.5rem;
+      border-bottom: 3px solid #FF8A65;
+      padding-bottom: 5px;
+    }
+
+    .preferences {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .preference-group {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .preference-group label {
+      margin-bottom: 0.8rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      color: #34495E;
+    }
+
+    .preference-group select,
+    .preference-group input[type="email"],
+    .preference-group input[type="text"] {
+      padding: 1rem;
+      border-radius: 10px;
+      border: 1px solid #BDC3C7;
+      font-size: 1rem;
+      transition: border 0.3s, box-shadow 0.3s;
+      background: #FFEBEE;
+    }
+
+    .preference-group select:focus,
+    .preference-group input:focus {
+      border-color: #FF8A65;
+      box-shadow: 0 0 10px rgba(255, 138, 101, 0.3);
+      outline: none;
+    }
+
+    button {
+      padding: 1rem 2rem;
+      background-color: #FF8A65;
+      color: white;
+      border: none;
+      border-radius: 15px;
+      font-size: 1.1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.3s, background-color 0.3s ease-in-out;
+      width: 100%;
+      margin-top: 1.5rem;
+    }
+
+    button:hover {
+      background-color: #F44336;
+      transform: translateY(-2px);
+    }
+
+    .spinner {
+      margin: 1.5rem auto 0;
+      border: 4px solid #F3F3F3;
+      border-top: 4px solid #3498DB;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      display: none;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .success-message {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 1.3rem;
+      color: #27AE60;
+      font-weight: 600;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .verification-section {
+      background: #FFECF1;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    }
+
+    .verification-section h3 {
+      font-size: 1.8rem;
+      color: #4A90E2;
+      margin-bottom: 1.5rem;
+      font-weight: 600;
+    }
+
+    .verification-section input {
+      padding: 1rem;
+      width: 100%;
+      border: 1px solid #BDC3C7;
+      border-radius: 10px;
+      background: #FFEBEE;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .verification-section input:focus {
+      border-color: #FF8A65;
+      box-shadow: 0 0 10px rgba(255, 138, 101, 0.3);
+    }
+
+    @media (max-width: 768px) {
+      .preferences {
+        grid-template-columns: 1fr;
+      }
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>Privacy Settings</header>
+
+    <section class="profile-section">
+      <img id="profileImage" src="https://via.placeholder.com/120" alt="Profile" />
+      <input type="file" id="profileFile" accept="image/*" onchange="previewImage()" />
+      <p><strong>Upload your profile picture</strong></p>
+    </section>
+
+    <section class="section">
+      <h2>Your Privacy Preferences</h2>
+      <form class="preferences" id="privacyForm">
+        <div class="preference-group">
+          <label for="location">Location Sharing</label>
+          <select id="location" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="allow">Allow</option>
+            <option value="deny">Don't Allow</option>
+          </select>
+        </div>
+        <div class="preference-group">
+          <label for="data-sharing">Data Sharing</label>
+          <select id="data-sharing" required>
+            <option value="" disabled selected>Select an option</option>
+            <option value="allow">Allow</option>
+            <option value="deny">Don't Allow</option>
+          </select>
+        </div>
+      </form>
+    </section>
+
+    <section class="verification-section">
+      <h3>Two-Step Verification</h3>
+      <p id="verificationText">Enter your email to receive a code.</p>
+      <div class="preference-group">
+        <input type="email" id="emailInput" placeholder="Enter your email" required />
+      </div>
+      <button type="button" onclick="sendVerificationCode()">Send Code</button>
+      <div id="verificationForm" style="display:none;">
+        <div class="preference-group">
+          <input type="text" id="verificationCode" placeholder="Enter code" required />
+        </div>
+        <button type="button" onclick="verifyCode()">Verify Code</button>
+      </div>
+    </section>
+
+    <button type="submit" onclick="saveSettings()">Save Settings</button>
+    <div id="loading" class="spinner"></div>
+    <div id="successMessage" class="success-message" style="display: none;">
+      Settings saved successfully!
+    </div>
+  </div>
+
+  <script>
+    function previewImage() {
+      const file = document.getElementById("profileFile").files[0];
+      const reader = new FileReader();
+      const img = document.getElementById("profileImage");
+
+      img.style.opacity = 0;
+
+      reader.onloadend = function () {
+        setTimeout(() => {
+          img.src = reader.result;
+          img.style.opacity = 1;
+        }, 100);
+      };
+
+      if (file) {
+        reader.readAsDataURL(file);
+      }
+    }
+
+    function saveSettings() {
+      const form = document.getElementById('privacyForm');
+      const loading = document.getElementById('loading');
+
+      if (!form.checkValidity()) {
+        alert("Please complete all fields.");
+        return;
+      }
+
+      loading.style.display = 'block';
+      setTimeout(() => {
+        loading.style.display = 'none';
+        document.getElementById('successMessage').style.display = 'block';
+        setTimeout(() => {
+          document.getElementById('successMessage').style.display = 'none';
+        }, 3000);
+      }, 2000);
+    }
+
+    function sendVerificationCode() {
+      const email = document.getElementById("emailInput").value;
+      if (!email) {
+        alert("Please enter a valid email.");
+        return;
+      }
+
+      alert(`A verification code has been sent to ${email}.`);
+      document.getElementById("verificationForm").style.display = "block";
+    }
+
+    function verifyCode() {
+      const code = document.getElementById("verificationCode").value;
+      const correctCode = "123456";
+      if (code === correctCode) {
+        alert("Verification successful!");
+        document.getElementById("verificationForm").style.display = "none";
+        document.getElementById("verificationText").textContent = "Verification complete!";
+      } else {
+        alert("Invalid code. Try again.");
+      }
+    }
+  </script>
+</body>
+</html>
